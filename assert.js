@@ -5,7 +5,7 @@ const assert = (condition, message) => {
       "[Assertion failed]: " + (message || "No message.")
     );
   } else {
-    console.log("\x1b[36m%s\x1b[0m", message);
+    console.log("\x1b[36m%s\x1b[0m", message || "No message.");
   }
 };
 
