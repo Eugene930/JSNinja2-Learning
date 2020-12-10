@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="subTree">
+        <form><input type="text"></form>
+        <p>Paragraph</p>
+        <span>Span</span>
+    </div>
+    <script>
+        const subTree = document.getElementById("subTree")
+
+        // Listing 6.6 Recursive DOM traversal
+        function traverseDOM(element, callback) {
+            callback(element);
+            element = element.firstElementChild;
+            while (element) {
+                traverseDOM(element, callback)
+                element = element.nextElementSibling
+            }
+        }
+        traverseDOM(subTree, function(element) {
+            console.log(element !== null, element.nodeName)
+        })
+        
+        // Listing 6.7 Iterating over a DOM tree with generators
+        function* DomTraversal(element) {
+            yield element;
+            element = element.firstElementChild;
+            while(element) {
+                yield* DomTraversal(element)
+                element = element.nextElementSibling
+            }
+        }
+        for(let element of DomTraversal(subTree)) {
+            console.log(element !== null, element.nodeName)
+        }
+    </script>
+</body>
+</html>
+
+<!-- * This example is a particulary good one, because it also shows how to use generators in order to separate the code that's producing values from the code that's consuming the sequence of generated values without having to resort to callbacks. -->
