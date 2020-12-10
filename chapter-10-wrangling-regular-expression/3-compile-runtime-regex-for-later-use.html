@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="samurai ninja"></div>
+    <div class="ninja samurai"></div>
+    <div></div>
+    <span class="samurai ninja ronin"></span>
+    <!-- ! This is an instance where we can't use a regex literal -->
+    <!-- ! Notice the use of a double-escape(\\), when creating literal regex with terms including the backslash, we have to provide the backslash only once. But because we're writing these backslashes within a string, we must double-escape them. -->
+    <script>
+        function findClassInElements(className, type) {
+            const elems = document.getElementsByTagName(type || "*")
+            // The regex match the beginning of the string or a whitespace character, followed by the targetname, followed by either a whitespace character or the end of the string.
+            const regex = new RegExp("(^|\\s)" + className + "(\\s|$)")
+            const results = [];
+            for(let i = 0, length = elems.length; i < length; i++)
+                if(regex.test(elems[i].className)) {
+                    results.push(elems[i])
+                }
+            return results
+        }
+        console.log(
+            findClassInElements("ninja", "div").length === 2, "The right amount of div ninjas was found"
+        )
+        console.log(
+            findClassInElements("ninja", "span").length === 1, "The right amount of span ninjas was found"
+        )
+        console.log(
+            findClassInElements("ninja").length === 3, 
+            "The right amount of ninjas was found"
+        )
+    </script>
+</body>
+</html>

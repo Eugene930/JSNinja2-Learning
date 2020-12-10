@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const MouseCounterModule = function() {
+    let numClicks = 0;
+    const handleClick = () => {
+        alert(++numClicks)
+    };
+
+    return {
+        countClicks: () => {
+            document.addEventListener("click", handleClick)
+        }
+    }}();
+
+    (function(module) {
+        let numScrolls = 0;
+        const handleScroll = () => {
+            alert(++numScrolls)
+        }
+
+        module.countScrolls = () => {
+            document.addEventListener("wheel", handleScroll)
+        }
+    })(MouseCounterModule)
+
+    console.log(
+        typeof MouseCounterModule.countClicks === "function", "We can acess initial module functionality"
+    );
+    console.log(
+        typeof MouseCounterModule.countScrolls === "function",
+        "We can acess augmented module functionality"
+    )
+</script>
+</html>
+
+<!-- ! One of shortcomings of the module pattern: the inability to share private module variables across module extensions -->
+
+<!-- ! There are more problems with the module pattern, dosen't cover the management of module dependencies. -->

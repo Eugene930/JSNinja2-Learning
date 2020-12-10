@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const MouseCounterModule = function() {
+    let numClicks = 0;
+    const handleClick = () => {
+        alert(++numClicks)
+    };
+
+    return {
+        countClicks: () => {
+            document.addEventListener("click", handleClick)
+        }
+    }}();
+
+    // MouseCounterModule.countClicks()
+
+    console.log(
+        typeof MouseCounterModule.countClicks === "function", "We can acess module functionality"
+    );
+    console.log(
+        typeof MouseCounterModule.numClicks === "undefined" 
+    && typeof MouseCounterModule.handleClick === "undefined",
+        "We cannot acess internal module details"
+    )
+</script>
+</html>
+
+<!-- * Minimal module system requirement:
+    * - Hiding module internals: --- Function Scope
+    * - Difining module interfaces: --- Objects and Closures
+-->

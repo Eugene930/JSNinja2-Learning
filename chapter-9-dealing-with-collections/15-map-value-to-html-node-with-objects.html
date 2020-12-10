@@ -1,0 +1,26 @@
+<div id="firstElement"></div>
+<div id="secondElement"></div>
+<script>
+    const firstElement = document.getElementById("firstElement");
+    const secondElement = document.getElementById("secondElement")
+
+    const map = {};
+    console.log(firstElement)
+    console.log(secondElement)
+
+    map[firstElement] = {data:"firstElement"}
+    console.log(map[firstElement].data === "firstElement", "The first element is correcyly mapped");
+    
+    map[secondElement] = {data: "secondElement"}
+    console.log(map[secondElement].data === "secondElement", "The second element is correctly mapped");
+
+    console.log(map[firstElement].data === "firstElement", "But now the firstElement is overriden!");
+
+    // -----
+    const newmap = new Map()
+    newmap.set(firstElement, "yeah first")
+    newmap.set(secondElement, "ohhh 2nd!")
+    console.log(newmap.get(firstElement))
+    console.log(newmap.get(secondElement))
+</script>
+<!-- ! This happends because with objects, key are stored as string. HtTML element is silently converted to a string by calling its toString method. Here, this returns the string "[object HTMLDivElement]" -->

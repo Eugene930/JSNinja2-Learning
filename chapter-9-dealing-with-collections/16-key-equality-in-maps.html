@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    const map = new Map()
+    const currentLocation = location.href
+
+    const firstLink = new URL(currentLocation)
+    const secondLink = new URL(currentLocation)
+
+    map.set(firstLink, {decription:"firstLink"})
+    map.set(secondLink, {decription:"secondLink"})
+
+    console.log(map.get(firstLink).decription === "firstLink", "First link mapping")
+    console.log(map.get(secondLink).decription === "secondLink", "Second link mapping")
+    console.log(map.size === 2, "There are two mappings")
+</script>
+</html>
+
+<!-- ! We could argue that, when creating mappings, these two objects should be considered equal. But in Javascript, we can't overload the equality operator, and the two objects, even though they have the same content, are always considered different.-->
